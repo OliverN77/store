@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/assets/img/bottle.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/confirmation.css') }}">
+    <title>Compra Confirmada - Maison Aurora</title>
+</head>
+<body>
+    <!-- Navegación superior fija -->
+    <div class="top-actions">
+        <!-- Sección izquierda -->
+        <div class="nav-left">
+            <div class="back-btn">
+                <a href="{{ url_for('products.list') }}"><i class="fas fa-arrow-left"></i> Seguir comprando</a>
+            </div>
+            
+            <div class="nav-logo">
+                <div class="perfume-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M9 2V4H7C6.45 4 6 4.45 6 5S6.45 6 7 6H17C17.55 6 18 5.55 18 5S17.55 4 17 4H15V2H9ZM8 7V9H16V7L18 9V20C18 21.1 17.1 22 16 22H8C6.9 22 6 21.1 6 20V9L8 7ZM10 12V18H14V12H10Z"/>
+                    </svg>
+                </div>
+                <h3>Maison Aurora</h3>
+            </div>
+        </div>
+        
+        <!-- Sección derecha -->
+        <div class="nav-right">
+            <a href="{{ url_for('orders.my_purchases') }}" class="nav-link" title="Mis pedidos">
+                <i class="fa-solid fa-tag"></i>
+            </a>
+            <div class="theme-toggle" id="themeToggle">
+                <div class="toggle-track">
+                    <div class="toggle-thumb">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <i class="fas fa-moon moon-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal de confirmación -->
+    <main class="confirmation-main">
+        <div class="confirmation-container">
+            <!-- Icono de confirmación -->
+            <div class="confirmation-icon">
+                <div class="success-circle">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="perfume-celebration">
+                    <div class="perfume-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M9 2V4H7C6.45 4 6 4.45 6 5S6.45 6 7 6H17C17.55 6 18 5.55 18 5S17.55 4 17 4H15V2H9ZM8 7V9H16V7L18 9V20C18 21.1 17.1 22 16 22H8C6.9 22 6 21.1 6 20V9L8 7ZM10 12V18H14V12H10Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenido de confirmación -->
+            <div class="confirmation-content">
+                <h1 class="confirmation-title">¡Compra Confirmada!</h1>
+                <p class="confirmation-subtitle">Tu pedido ha sido procesado exitosamente</p>
+                
+                <div class="order-details">
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <div class="detail-info">
+                            <span class="detail-label">Número de Orden</span>
+                            <span class="detail-value">#{{ orden_id }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="detail-info">
+                            <span class="detail-label">Total Pagado</span>
+                            <span class="detail-value">${{ "%.2f"|format(total) }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="detail-info">
+                            <span class="detail-label">Fecha de Pedido</span>
+                            <span class="detail-value">{{ moment().format('DD/MM/YYYY HH:mm') if moment else 'Hoy' }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="confirmation-message">
+                    <div class="message-card">
+                        <h3>¿Qué sigue ahora?</h3>
+                        <ul class="next-steps">
+                            <li><i class="fas fa-envelope"></i> Recibirás un email de confirmación en breve</li>
+                            <li><i class="fas fa-truck"></i> Tu pedido será procesado en 24-48 horas</li>
+                            <li><i class="fas fa-gift"></i> El envío llegará en 3-5 días hábiles</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="confirmation-actions">
+                    <a href="{{ url_for('products.list') }}" class="btn-primary">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Seguir comprando</span>
+                    </a>
+                    <a href="{{ url_for('orders.my_purchases') }}" class="btn-secondary">
+                        <i class="fas fa-history"></i>
+                        <span>Ver mis compras</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Partículas de celebración -->
+    <div id="celebration-particles"></div>
+
+    <script src="{{ url_for('static', filename='js/confirmation.js') }}"></script>
+</body>
+</html>

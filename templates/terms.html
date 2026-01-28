@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/assets/img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/terms.css') }}">
+    <title>Términos y Condiciones - Maison Aurora</title>
+</head>
+
+<body>
+    <!-- Navegación superior -->
+    <div class="top-actions">
+        <div class="back-btn">
+            <a href="/form"><i class="fas fa-arrow-left"></i> Volver</a>
+        </div>
+
+        <!-- Toggle de modo oscuro -->
+        <div class="theme-toggle" id="themeToggle">
+            <div class="toggle-track">
+                <div class="toggle-thumb">
+                    <i class="fas fa-moon moon-icon"></i>
+                    <i class="fas fa-sun sun-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="terms-container">
+        <!-- Encabezado elegante -->
+        <header class="terms-header">
+            <div class="logo-section">
+                <div class="perfume-icon">
+                    <div class="perfume-bottle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M9 2V4H7C6.45 4 6 4.45 6 5S6.45 6 7 6H17C17.55 6 18 5.55 18 5S17.55 4 17 4H15V2H9ZM8 7V9H16V7L18 9V20C18 21.1 17.1 22 16 22H8C6.9 22 6 21.1 6 20V9L8 7ZM10 12V18H14V12H10Z" />
+                        </svg>
+                    </div>
+                </div>
+                <h1>Maison Aurora</h1>
+                <h2>Términos y Condiciones</h2>
+                <p class="last-updated">Última actualización: 21 de Septiembre, 2025</p>
+            </div>
+        </header>
+
+        <!-- Contenido principal -->
+        <main class="terms-content">
+            <!-- Introducción -->
+            <section class="terms-intro">
+                <div class="intro-card">
+                    <div class="intro-icon">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <div class="intro-text">
+                        <h3>Bienvenido/a a Maison Aurora</h3>
+                        <p>Un sitio web dedicado a la venta de perfumes selectos y productos de lujo relacionados. Al
+                            acceder y utilizar este sitio web, aceptas cumplir con los siguientes términos y
+                            condiciones. Te recomendamos leerlos cuidadosamente antes de realizar cualquier compra.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Términos principales -->
+            <div class="terms-grid">
+                <!-- Término 1: Uso del sitio web -->
+                <article class="term-card">
+                    <div class="term-header">
+                        <div class="term-number">1</div>
+                        <h3>Uso del sitio web</h3>
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="term-content">
+                        <ul>
+                            <li>El acceso y uso de este sitio web está permitido solo para mayores de edad con capacidad
+                                legal para contratar.</li>
+                            <li>El contenido del sitio, incluyendo imágenes, descripciones y precios, es propiedad de
+                                <strong>Maison Aurora</strong> y está protegido por las leyes de propiedad intelectual.
+                            </li>
+                            <li>Está prohibido el uso del sitio con fines fraudulentos, ilegales o que puedan dañar a
+                                <strong>Maison Aurora</strong> o a otros usuarios.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Término 2: Productos y precios -->
+                <article class="term-card">
+                    <div class="term-header">
+                        <div class="term-number">2</div>
+                        <h3>Productos y precios</h3>
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <div class="term-content">
+                        <ul>
+                            <li>Los perfumes y demás productos disponibles se muestran con la información más precisa
+                                posible. No obstante, pueden existir errores tipográficos o variaciones mínimas en
+                                empaques o presentaciones.</li>
+                            <li>Los precios están expresados en <strong>USD ($)</strong> e incluyen los impuestos
+                                correspondientes, salvo que se indique lo contrario.</li>
+                            <li><strong>Maison Aurora</strong> se reserva el derecho de modificar los precios y la
+                                disponibilidad de los productos en cualquier momento sin previo aviso.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Término 3: Pedidos y pagos -->
+                <article class="term-card">
+                    <div class="term-header">
+                        <div class="term-number">3</div>
+                        <h3>Pedidos y pagos</h3>
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="term-content">
+                        <ul>
+                            <li>Al realizar un pedido, aceptas proporcionar información veraz y actualizada para la
+                                facturación y el envío.</li>
+                            <li>Los métodos de pago aceptados son los que se indiquen en el sitio web en el momento de
+                                la compra.</li>
+                            <li>La confirmación del pedido está sujeta a la validación del pago.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Término 4: Envíos y entregas -->
+                <article class="term-card">
+                    <div class="term-header">
+                        <div class="term-number">4</div>
+                        <h3>Envíos y entregas</h3>
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div class="term-content">
+                        <ul>
+                            <li>Los pedidos serán enviados a la dirección indicada por el cliente durante el proceso de
+                                compra.</li>
+                            <li>Los tiempos de entrega pueden variar según la ubicación y disponibilidad del producto.
+                                <strong>Maison Aurora</strong> no se hace responsable por retrasos atribuibles a la
+                                empresa de mensajería.</li>
+                            <li>El cliente recibirá un número de guía o comprobante para el seguimiento de su pedido.
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Término 5: Cambios, devoluciones y garantías -->
+                <article class="term-card">
+                    <div class="term-header">
+                        <div class="term-number">5</div>
+                        <h3>Cambios, devoluciones y garantías</h3>
+                        <i class="fas fa-undo-alt"></i>
+                    </div>
+                    <div class="term-content">
+                        <ul>
+                            <li>Por motivos de higiene, solo se aceptarán cambios o devoluciones si el producto presenta
+                                defectos de fábrica o ha llegado en condiciones inadecuadas.</li>
+                            <li>El cliente deberá notificar cualquier inconveniente en un plazo máximo de <strong>7
+                                    días</strong> después de recibir el pedido.</li>
+                            <li>El reembolso o reemplazo se realizará siguiendo los procedimientos internos de
+                                <strong>Maison Aurora</strong>.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Término 6: Responsabilidad del usuario -->
+                <article class="term-card">
+                    <div class="term-header">
+                        <div class="term-number">6</div>
+                        <h3>Responsabilidad del usuario</h3>
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="term-content">
+                        <ul>
+                            <li>El usuario es responsable de mantener la confidencialidad de sus datos de acceso a la
+                                cuenta.</li>
+                            <li>El mal uso de descuentos, cupones o promociones podrá resultar en la cancelación del
+                                pedido.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Término 7: Privacidad y protección de datos -->
+                <article class="term-card">
+                    <div class="term-header">
+                        <div class="term-number">7</div>
+                        <h3>Privacidad y protección de datos</h3>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="term-content">
+                        <ul>
+                            <li>La información personal proporcionada será tratada conforme a nuestra Política de
+                                Privacidad, disponible en este sitio.</li>
+                            <li><strong>Maison Aurora</strong> se compromete a no compartir los datos personales de los
+                                clientes con terceros, salvo en los casos necesarios para procesar pedidos o cuando lo
+                                exija la ley.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Término 8: Limitación de responsabilidad -->
+                <article class="term-card">
+                    <div class="term-header">
+                        <div class="term-number">8</div>
+                        <h3>Limitación de responsabilidad</h3>
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="term-content">
+                        <ul>
+                            <li><strong>Maison Aurora</strong> no garantiza que el sitio esté libre de interrupciones,
+                                errores o virus.</li>
+                            <li>La empresa no se hace responsable por daños derivados del uso indebido de los productos
+                                adquiridos.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Término 9: Modificaciones de los términos -->
+                <article class="term-card">
+                    <div class="term-header">
+                        <div class="term-number">9</div>
+                        <h3>Modificaciones de los términos</h3>
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="term-content">
+                        <p><strong>Maison Aurora</strong> se reserva el derecho de modificar estos Términos y
+                            Condiciones en cualquier momento. Los cambios entrarán en vigor a partir de su publicación
+                            en el sitio web.</p>
+                    </div>
+                </article>
+
+                <!-- Término 10: Legislación aplicable -->
+                <article class="term-card">
+                    <div class="term-header">
+                        <div class="term-number">10</div>
+                        <h3>Legislación aplicable</h3>
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="term-content">
+                        <p>Estos Términos y Condiciones se rigen por las leyes de <strong>Estados Unidos</strong>, y
+                            cualquier controversia será resuelta en los tribunales competentes de dicho país.</p>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Sección de contacto -->
+            <section class="contact-section">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-content">
+                        <h3>¿Tienes alguna pregunta?</h3>
+                        <p>Si necesitas aclarar algún punto de nuestros términos y condiciones, no dudes en
+                            contactarnos.</p>
+                        <a href="mailto:legal@maisonaurora.com" class="contact-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Contáctanos</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer de aceptación -->
+            <section class="acceptance-footer">
+                <div class="acceptance-card">
+                    <div class="acceptance-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="acceptance-content">
+                        <h3>Aceptación de términos</h3>
+                        <p>Al utilizar nuestros servicios, confirmas que has leído, entendido y aceptado estos términos
+                            y condiciones en su totalidad.</p>
+                        <div class="signature">
+                            <div class="signature-line"></div>
+                            <p>Maison Aurora - Perfumería Selecta</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/terms.js') }}"></script>
+</body>
+
+</html>

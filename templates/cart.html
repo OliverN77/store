@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/assets/img/bottle.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+    <title>Carrito - Maison Aurora</title>
+</head>
+
+<body>
+    <!-- Navegación superior fija -->
+    <div class="top-actions">
+        <!-- Sección izquierda -->
+        <div class="nav-left">
+            <div class="back-btn">
+                <a href="{{ url_for('products.list') }}"><i class="fas fa-arrow-left"></i> Seguir comprando</a>
+            </div>
+
+            <div class="nav-logo">
+                <div class="perfume-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M9 2V4H7C6.45 4 6 4.45 6 5S6.45 6 7 6H17C17.55 6 18 5.55 18 5S17.55 4 17 4H15V2H9ZM8 7V9H16V7L18 9V20C18 21.1 17.1 22 16 22H8C6.9 22 6 21.1 6 20V9L8 7ZM10 12V18H14V12H10Z" />
+                    </svg>
+                </div>
+                <h3>Maison Aurora</h3>
+            </div>
+        </div>
+
+        <!-- Sección derecha -->
+        <div class="nav-right">
+            <a href="{{ url_for('orders.my_purchases') }}" class="nav-link" title="Mis pedidos">
+                <i class="fa-solid fa-tag"></i>
+            </a>
+            <div class="theme-toggle" id="themeToggle">
+                <div class="toggle-track">
+                    <div class="toggle-thumb">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <i class="fas fa-moon moon-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="brand-info">
+                <h1>Tu Carrito de Compras</h1>
+                <p class="subtitle">Revisa tus fragancias seleccionadas</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal del carrito -->
+    <main class="cart-main">
+        {% if cart %}
+        <section class="cart-content">
+            <div class="cart-items">
+                {% for item in cart %}
+                <article class="cart-item">
+                    <div class="item-image-wrapper">
+                        <img src="{{ url_for('static', filename=item['image']) }}" alt="{{ item['name'] }}"
+                            class="item-image" loading="lazy">
+                    </div>
+
+                    <div class="item-info">
+                        <h3 class="item-name">{{ item['name'] }}</h3>
+                        <p class="item-price">Precio unitario: ${{ "%.2f"|format(item['price']) }}</p>
+                        <div class="item-quantity">
+                            <span class="quantity-label">Cantidad:</span>
+                            <span class="quantity-value">{{ item['quantity'] }}</span>
+                        </div>
+                    </div>
+
+                    <div class="item-actions">
+                        <div class="item-subtotal">
+                            <span class="subtotal-label">Subtotal</span>
+                            <span class="subtotal-value">${{ "%.2f"|format(item['price'] * item['quantity']) }}</span>
+                        </div>
+                        <a href="{{ url_for('cart.remove', product_id=item['id']) }}" class="btn-remove"
+                            title="Eliminar {{ item['name'] }}">
+                            <i class="fas fa-trash"></i>
+                            <span>Eliminar</span>
+                        </a>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            <!-- Resumen del carrito -->
+            <div class="cart-summary">
+                <div class="summary-content">
+                    <div class="summary-row">
+                        <span class="summary-label">Total de productos:</span>
+                        <span class="summary-value">{{ cart|length }} artículo{% if cart|length != 1 %}s{% endif
+                            %}</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span class="summary-label">Total a pagar:</span>
+                        <span class="summary-value total-value">${{ "%.2f"|format(total) }}</span>
+                    </div>
+                </div>
+
+                <div class="cart-actions">
+                    <a href="{{ url_for('cart.empty') }}" class="btn-secondary">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>Vaciar carrito</span>
+                    </a>
+                    <a href="{{ url_for('orders.checkout') }}" class="btn-primary">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Finalizar Compra</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        {% else %}
+        <section class="empty-cart">
+            <div class="empty-cart-content">
+                <div class="empty-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h2>Tu carrito está vacío</h2>
+                <p class="empty-description">Descubre nuestra exclusiva colección de perfumes y añade tus fragancias
+                    favoritas.</p>
+                <a href="{{ url_for('products.list') }}" class="btn-primary">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Explorar productos</span>
+                </a>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/assets/img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <title>Maison Aurora - Perfumería Selecta</title>
+</head>
+
+<body>
+    <!-- Header principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="perfume-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M9 2V4H7C6.45 4 6 4.45 6 5S6.45 6 7 6H17C17.55 6 18 5.55 18 5S17.55 4 17 4H15V2H9ZM8 7V9H16V7L18 9V20C18 21.1 17.1 22 16 22H8C6.9 22 6 21.1 6 20V9L8 7ZM10 12V18H14V12H10Z" />
+                    </svg>
+                </div>
+                <div class="brand-info">
+                    <h1>Maison Aurora</h1>
+                    <p class="subtitle">Perfumería Selecta</p>
+                </div>
+            </div>
+
+            <nav class="nav__nav">
+                <ul class="nav__ul">
+                    <li>
+                        <!-- abrimos el drawer con JS -->
+                        <a href="/cart" class="cart-icon nav-link" id="openCartBtn" title="Ver carrito">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="cart-badge" id="cartCount">{% if session.cart_count %}{{ session.cart_count
+                                }}{% else %}0{% endif %}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/my_purchases" class="nav-link" title="Mis pedidos">
+                            <i class="fa-solid fa-tag"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Top Actions -->
+    <div class="top-actions">
+        <div class="back-btn">
+            <a href="#" onclick="abrirModal(event)">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+        </div>
+
+        <div class="theme-toggle" id="themeToggle">
+            <div class="toggle-track">
+                <div class="toggle-thumb">
+                    <i class="fas fa-sun sun-icon"></i>
+                    <i class="fas fa-moon moon-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Catálogo principal -->
+    <section class="perfume-catalog">
+        <div class="catalog-header">
+            <h2>Nuestra colección de productos</h2>
+            <p class="catalog-subtitle">Descubre fragancias que despiertan los sentidos</p>
+        </div>
+
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}"
+                        class="product-image">
+                </div>
+
+                <div class="product-info">
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <p class="product-description">{{ product.description }}</p>
+
+                    <div class="product-footer">
+                        <p class="product-price">${{ "%.2f"|format(product.price) }}</p>
+                        <a href="{{ url_for('cart.add', product_id=product.id) }}" class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                            <span>Agregar al carrito</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Modal de confirmación -->
+    <div id="modalSalida" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <div class="modal-body">
+                <div class="modal-icon">
+                    <div class="perfume-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M9 2V4H7C6.45 4 6 4.45 6 5S6.45 6 7 6H17C17.55 6 18 5.55 18 5S17.55 4 17 4H15V2H9ZM8 7V9H16V7L18 9V20C18 21.1 17.1 22 16 22H8C6.9 22 6 21.1 6 20V9L8 7ZM10 12V18H14V12H10Z" />
+                        </svg>
+                    </div>
+                </div>
+                <h2>¿Abandonar Maison Aurora?</h2>
+                <p class="modal-description">¿Estás seguro de que deseas regresar al inicio?</p>
+                <div class="modal-buttons">
+                    <a href="{{ url_for('main.home') }}" class="exit-btn">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span class="auth-text">Sí, regresar</span>
+                    </a>
+                    <button class="btn-cancel" onclick="cerrarModal()">Quedarme aquí</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/products.js') }}"></script>
+</body>
+
+</html>

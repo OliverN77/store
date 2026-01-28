@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Historial de Compras - Maison Aurora</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/img/bottle.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my_purchases.css') }}">
+</head>
+
+<body>
+    <!-- Navegación superior fija -->
+    <nav class="top-actions">
+        <!-- Sección izquierda -->
+        <div class="nav-left">
+            <div class="back-btn">
+                <a href="{{ url_for('products.list') }}"><i class="fas fa-arrow-left"></i> Seguir comprando</a>
+            </div>
+
+            <div class="nav-logo">
+                <div class="perfume-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M9 2V4H7C6.45 4 6 4.45 6 5S6.45 6 7 6H17C17.55 6 18 5.55 18 5S17.55 4 17 4H15V2H9ZM8 7V9H16V7L18 9V20C18 21.1 17.1 22 16 22H8C6.9 22 6 21.1 6 20V9L8 7ZM10 12V18H14V12H10Z" />
+                    </svg>
+                </div>
+                <h3>Maison Aurora</h3>
+            </div>
+        </div>
+
+        <!-- Sección central -->
+        <div class="nav-center">
+            <nav class="nav__nav">
+                <ul class="nav__ul">
+                    <li>
+                        <a href="{{ url_for('cart.view') }}" class="nav-link" title="Ver carrito">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" title="Mi perfil">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Sección derecha -->
+        <div class="nav-right">
+            <div class="theme-toggle" onclick="toggleTheme()">
+                <div class="toggle-track">
+                    <div class="toggle-thumb">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <i class="fas fa-moon moon-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="brand-info">
+                <h1>Mi Historial de Compras</h1>
+                <p class="subtitle">Revisa todas tus fragancias adquiridas</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="purchases-main">
+        {% if orders %}
+        <section class="orders-section">
+            <div class="orders-container">
+                {% for order in orders %}
+                <article class="order-card">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <div class="order-number">
+                                <i class="fas fa-receipt"></i>
+                                <span>Orden #{{ order.id }}</span>
+                            </div>
+                            <div class="order-status">
+                                <span class="status-badge status-completed">Completada</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-body">
+                        <div class="order-details">
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div class="detail-content">
+                                    <span class="detail-label">Fecha de compra</span>
+                                    <span class="detail-value">{{ order.purchase_date.strftime('%d/%m/%Y %H:%M') }}</span>
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <div class="detail-content">
+                                    <span class="detail-label">Total pagado</span>
+                                    <span class="detail-value total-amount">${{ "%.2f"|format(order.total) }}</span>
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <i class="fas fa-box"></i>
+                                <div class="detail-content">
+                                    <span class="detail-label">Productos</span>
+                                    <span class="detail-value">{{ order.products }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-actions">
+                            <button class="btn-details" onclick="toggleOrderDetails('{{ order.id }}')">
+                                <i class="fas fa-eye"></i>
+                                <span>Ver detalles</span>
+                            </button>
+                            <button class="btn-reorder">
+                                <i class="fas fa-redo"></i>
+                                <span>Reordenar</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="order-details-expanded" id="details-{{ order.id }}" style="display: none;">
+                        <div class="expanded-content">
+                            <h4>Detalle de productos</h4>
+                            <div class="products-list">
+                                <!-- Aquí irían los productos específicos si los tienes -->
+                                <div class="product-item">
+                                    <span class="product-name">Productos incluidos en esta orden</span>
+                                    <span class="product-summary">{{ order.products }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        {% else %}
+        <section class="empty-purchases">
+            <div class="empty-content">
+                <div class="empty-icon">
+                    <div class="perfume-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M9 2V4H7C6.45 4 6 4.45 6 5S6.45 6 7 6H17C17.55 6 18 5.55 18 5S17.55 4 17 4H15V2H9ZM8 7V9H16V7L18 9V20C18 21.1 17.1 22 16 22H8C6.9 22 6 21.1 6 20V9L8 7ZM10 12V18H14V12H10Z" />
+                        </svg>
+                    </div>
+                </div>
+                <h2>Aún no tienes compras</h2>
+                <p class="empty-description">Descubre nuestra exclusiva colección de perfumes y realiza tu primera
+                    compra.
+                </p>
+                <a href="{{ url_for('products.list') }}" class="btn-primary">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Explorar productos</span>
+                </a>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/my_purchases.js') }}"></script>
+</body>
+
+</html>

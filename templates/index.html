@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../static/assets/img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;700&family=Inter:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Maison Aurora - Perfumería Selecta</title>
+</head>
+
+<body>
+
+    <!-- Modal de alerta -->
+    <div id="alertModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <button class="close-modal" id="closeAlertModal" aria-label="Cerrar modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>¡Inicia sesión para continuar!</h2>
+            <p>Para añadir productos al carrito necesitas tener una cuenta. Es rápido y fácil.</p>
+            <div class="modal-links">
+                <a href="/form" class="register-btn ripple-effect">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Regístrate</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación flotante minimalista -->
+    <nav class="minimal-nav">
+        <div class="logo">MAISON AURORA</div>
+        <div class="nav-links">
+            <a href="#hero">Inicio</a>
+            <a href="#collections">Colecciones</a>
+            <a href="#featured">Destacados</a>
+            <a href="#footer">Contacto</a>
+        </div>
+        <div class="nav-actions">
+            <!-- Toggle de modo oscuro -->
+            <div class="theme-toggle" id="themeToggle">
+                <div class="toggle-track">
+                    <div class="toggle-thumb">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <i class="fas fa-moon moon-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de autenticación -->
+            <div class="auth-buttons">
+                <a href="/form" class="auth-btn login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Iniciar Sesión</span>
+                </a>
+                <a href="/form" class="auth-btn register-btn-nav">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Registrarse</span>
+                </a>
+            </div>
+            <!-- Hamburguer button -->
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir menú">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Overlay para cerrar el menú móvil -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Menú móvil -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <div class="logo">MAISON AURORA</div>
+            <button class="mobile-close-btn" id="mobileCloseBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="mobile-nav-links">
+            <a href="#hero">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="#collections">
+                <i class="fas fa-layer-group"></i>
+                <span>Colecciones</span>
+            </a>
+            <a href="#featured">
+                <i class="fas fa-star"></i>
+                <span>Destacados</span>
+            </a>
+            <a href="#footer">
+                <i class="fas fa-envelope"></i>
+                <span>Contacto</span>
+            </a>
+        </div>
+
+        <div class="mobile-auth-section">
+            <h4>Cuenta</h4>
+            <div class="mobile-auth-buttons">
+                <a href="/form" class="mobile-auth-btn login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Iniciar Sesión</span>
+                </a>
+                <a href="/form" class="mobile-auth-btn register">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Registrarse</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mobile-theme-section">
+            <span>Modo Oscuro</span>
+            <div class="theme-toggle" id="mobileThemeToggle">
+                <div class="toggle-track">
+                    <div class="toggle-thumb">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <i class="fas fa-moon moon-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section - Full Screen Split -->
+    <section id="hero" class="hero-split">
+        <div class="hero-left">
+            <div class="hero-content">
+                <span class="hero-subtitle">Desde 1985</span>
+                <h1 class="hero-title">La esencia de la elegancia</h1>
+                <p class="hero-description">Descubre fragancias únicas que definen tu personalidad</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Fragancias</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Marcas</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">10k+</span>
+                        <span class="stat-label">Clientes</span>
+                    </div>
+                </div>
+                <button class="cta-minimal">
+                    <span>Explorar Colección</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="hero-image-container">
+                <img src="../static/assets/img/hero-perfume.png" alt="Perfume elegante" class="hero-perfume">
+                <div class="floating-elements">
+                    <div class="element element-1"></div>
+                    <div class="element element-2"></div>
+                    <div class="element element-3"></div>
+                </div>
+                <div class="hero-glow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Colecciones Mejoradas -->
+    <section id="collections" class="collections-modern">
+        <div class="collections-container">
+            <div class="section-header-modern">
+                <div class="header-content">
+                    <span class="section-subtitle">Nuestras</span>
+                    <h2>Colecciones Exclusivas</h2>
+                    <p>Cada fragancia cuenta una historia única</p>
+                </div>
+                <div class="header-decoration">
+                    <div class="decoration-line"></div>
+                    <div class="decoration-dot"></div>
+                </div>
+            </div>
+
+            <div class="collections-grid-modern">
+                <!-- Colección Principal -->
+                <div class="collection-card-modern featured" data-category="premium">
+                    <div class="card-background">
+                        <div class="bg-overlay"></div>
+                        <div class="bg-pattern"></div>
+                    </div>
+                    <div class="card-content-modern">
+                        <div class="card-badge">Premium</div>
+                        <h3>Clásicos Atemporales</h3>
+                        <p>Fragancias legendarias que han definido épocas enteras</p>
+                        <div class="card-features">
+                            <span class="feature">• Ediciones limitadas</span>
+                            <span class="feature">• Notas exclusivas</span>
+                            <span class="feature">• Presentación de lujo</span>
+                        </div>
+                        <button class="explore-btn">
+                            <span>Explorar</span>
+                            <div class="btn-shine"></div>
+                        </button>
+                    </div>
+                    <div class="card-visual">
+                        <div class="perfume-silhouette"></div>
+                        <div class="scent-particles">
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colección Moderna -->
+                <div class="collection-card-modern" data-category="modern">
+                    <div class="card-background modern">
+                        <div class="bg-overlay"></div>
+                        <div class="bg-pattern"></div>
+                    </div>
+                    <div class="card-content-modern">
+                        <div class="card-badge modern">Tendencia</div>
+                        <h3>Modernos & Contemporáneos</h3>
+                        <p>Aromas que definen el presente</p>
+                        <div class="card-stats">
+                            <span class="stat">120+ productos</span>
+                            <span class="stat">95% satisfacción</span>
+                        </div>
+                        <button class="explore-btn modern">
+                            <span>Descubrir</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Colección Exclusiva -->
+                <div class="collection-card-modern" data-category="exclusive">
+                    <div class="card-background exclusive">
+                        <div class="bg-overlay"></div>
+                        <div class="bg-pattern"></div>
+                    </div>
+                    <div class="card-content-modern">
+                        <div class="card-badge exclusive">Exclusivo</div>
+                        <h3>Ediciones Especiales</h3>
+                        <p>Fragancias únicas para ocasiones especiales</p>
+                        <div class="exclusivity-indicator">
+                            <div class="rarity-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rarity-text">Ultra Exclusivo</span>
+                        </div>
+                        <button class="explore-btn exclusive">
+                            <span>Ver Exclusivos</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Colección Nicho -->
+                <div class="collection-card-modern small" data-category="niche">
+                    <div class="card-background niche">
+                        <div class="bg-overlay"></div>
+                        <div class="bg-pattern"></div>
+                    </div>
+                    <div class="card-content-modern">
+                        <div class="card-badge niche">Nicho</div>
+                        <h3>Fragancias de Nicho</h3>
+                        <p>Para conocedores exigentes</p>
+                        <button class="explore-btn niche">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Destacados con Carrusel Avanzado -->
+    <section id="featured" class="featured-modern">
+        <div class="featured-container">
+            <div class="featured-header-modern">
+                <div class="header-left">
+                    <span class="section-subtitle">Lo más</span>
+                    <h2>Destacado del Mes</h2>
+                    <p>Seleccionados especialmente para ti</p>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-indicators">
+                        <span class="indicator active"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                    </div>
+                    <button class="carousel-btn next" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="products-carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Producto 1 -->
+                    <div class="product-card-modern active">
+                        <div class="product-badge-container">
+                            <span class="product-badge bestseller">Bestseller</span>
+                        </div>
+                        <div class="product-image-modern">
+                            <img src="../static/assets/img/le-male-elixir.png" alt="Le Male Elixir"
+                                class="main-product-img">
+                            <div class="product-glow"></div>
+                            <div class="hover-overlay">
+                                <button class="quick-view-btn">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Vista Rápida</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info-modern">
+                            <div class="brand-modern">Jean Paul Gaultier</div>
+                            <h3 class="product-name-modern">Le Male Elixir</h3>
+                            <div class="product-rating-modern">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-count">(4.9) 127 reseñas</span>
+                            </div>
+                            <div class="scent-notes">
+                                <span class="note">Lavanda</span>
+                                <span class="note">Vainilla</span>
+                                <span class="note">Ámbar</span>
+                            </div>
+                            <div class="price-container-modern">
+                                <span class="current-price">$109.99</span>
+                                <span class="original-price">$143.99</span>
+                                <span class="discount">-23%</span>
+                            </div>
+                            <div class="product-actions-modern">
+                                <button class="add-to-cart-modern">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span>Añadir al Carrito</span>
+                                </button>
+                                <button class="size-selector">
+                                    <span>125ml</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="product-card-modern">
+                        <div class="product-badge-container">
+                            <span class="product-badge new">Nuevo</span>
+                        </div>
+                        <div class="product-image-modern">
+                            <img src="../static/assets/img/sauvage-elixir-dior.png" alt="Sauvage"
+                                class="main-product-img">
+                            <div class="product-glow"></div>
+                            <div class="hover-overlay">
+                                <button class="quick-view-btn">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Vista Rápida</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info-modern">
+                            <div class="brand-modern">Dior</div>
+                            <h3 class="product-name-modern">Sauvage Elixir</h3>
+                            <div class="product-rating-modern">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-count">(4.7) 89 reseñas</span>
+                            </div>
+                            <div class="scent-notes">
+                                <span class="note">Cálido especiado</span>
+                                <span class="note">Amaderado</span>
+                                <span class="note">Fresco especiado</span>
+                            </div>
+                            <div class="price-container-modern">
+                                <span class="current-price">$119.99</span>
+                            </div>
+                            <div class="product-actions-modern">
+                                <button class="add-to-cart-modern">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span>Añadir al Carrito</span>
+                                </button>
+                                <button class="size-selector">
+                                    <span>60ml</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="product-card-modern">
+                        <div class="product-badge-container">
+                            <span class="product-badge limited">Edición Limitada</span>
+                        </div>
+                        <div class="product-image-modern">
+                            <img src="../static/assets/img/black-opium.png" alt="Black Opium" class="main-product-img">
+                            <div class="product-glow"></div>
+                            <div class="hover-overlay">
+                                <button class="quick-view-btn">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Vista Rápida</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info-modern">
+                            <div class="brand-modern">Yves Saint Laurent</div>
+                            <h3 class="product-name-modern">Black Opium Le Parfum</h3>
+                            <div class="product-rating-modern">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-count">(5.0) 156 reseñas</span>
+                            </div>
+                            <div class="scent-notes">
+                                <span class="note">Café</span>
+                                <span class="note">Vainilla</span>
+                                <span class="note">Cedro</span>
+                            </div>
+                            <div class="price-container-modern">
+                                <span class="current-price">$148.99</span>
+                            </div>
+                            <div class="product-actions-modern">
+                                <button class="add-to-cart-modern">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span>Añadir al Carrito</span>
+                                </button>
+                                <button class="size-selector">
+                                    <span>90ml</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 4 -->
+                    <div class="product-card-modern">
+                        <div class="product-badge-container">
+                            <span class="product-badge bestseller">Popular</span>
+                        </div>
+                        <div class="product-image-modern">
+                            <img src="../static/assets/img/born-in-roma-intense.png" alt="La Vie Est Belle"
+                                class="main-product-img">
+                            <div class="product-glow"></div>
+                            <div class="hover-overlay">
+                                <button class="quick-view-btn">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Vista Rápida</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info-modern">
+                            <div class="brand-modern">Valentino Uomo</div>
+                            <h3 class="product-name-modern">Born In Roma Intense</h3>
+                            <div class="product-rating-modern">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-count">(4.8) 203 reseñas</span>
+                            </div>
+                            <div class="scent-notes">
+                                <span class="note">Aromático</span>
+                                <span class="note">Lavanda</span>
+                                <span class="note">Vainilla</span>
+                            </div>
+                            <div class="price-container-modern">
+                                <span class="current-price">$175.999</span>
+                            </div>
+                            <div class="product-actions-modern">
+                                <button class="add-to-cart-modern">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span>Añadir al Carrito</span>
+                                </button>
+                                <button class="size-selector">
+                                    <span>100ml</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información adicional -->
+            <div class="featured-footer">
+                <div class="shipping-info">
+                    <div class="info-item">
+                        <i class="fas fa-truck"></i>
+                        <span>Envío gratis en compras +$150</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Garantía de autenticidad</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-undo"></i>
+                        <span>30 días para devoluciones</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer minimalista -->
+    <footer class="footer-minimal" id="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="logo">MAISON AURORA</div>
+                <p>La elegancia en cada gota</p>
+                <div class="footer-info">
+                    <p>📍 Av. Principal 123, Ciudad</p>
+                    <p>📧 contacto@maisonaurora.com</p>
+                    <p>📞 +1 234 567 8900</p>
+                </div>
+            </div>
+            <div class="footer-center">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#about">Sobre Nosotros</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="#privacy">Privacidad</a></li>
+                    <li><a href="#terms">Términos</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h4>Síguenos</h4>
+                <div class="social-minimal">
+                    <a href="#" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+                <div class="newsletter">
+                    <h4>Newsletter</h4>
+                    <form id="newsletterForm" method="POST" action="{{ url_for('main.newsletter') }}">
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Tu email" name="email" id="emailInput" required>
+                            <button type="button" onclick="submitNewsletter()" id="submitButton">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Mensajes flash -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="newsletter-message newsletter-{{ category }}">
+                        <i
+                            class="fas {% if category == 'success' %}fa-check-circle{% else %}fa-exclamation-triangle{% endif %}"></i>
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MAISON AURORA Perfumería. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
