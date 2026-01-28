@@ -8,7 +8,7 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = 'olivernie2626@gmail.com'
-    MAIL_PASSWORD = 'hduj kodn ztxb htbm'
+    MAIL_PASSWORD = 'rtlwhkeyzachylvi'
     MAIL_DEFAULT_SENDER = 'olivernie2626@gmail.com'
     
     MAIL_DEBUG = True

@@ -139,18 +139,33 @@ python create_admin.py
 
 ### Paso 5: Configurar Variables de Entorno
 
-Edita `config/settings.py` con tus credenciales:
+**Importante**: Los archivos `config/settings.py` y `config/db.py` están en `.gitignore` por seguridad. Debes crearlos localmente:
 
+**Crear `config/settings.py`:**
 ```python
-# Configuración de Email
+# Configuración de Email (Flask-Mail)
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 587
+MAIL_USE_TLS = True
 MAIL_USERNAME = 'tu-email@gmail.com'
-MAIL_PASSWORD = 'tu-password-app'
+MAIL_PASSWORD = 'tu-password-app'  # Usa App Password de Gmail
+MAIL_DEFAULT_SENDER = 'tu-email@gmail.com'
 
-# Configuración de Base de Datos (en config/db.py)
-host='localhost'
-user='root'
-password='tu-password'
-database='store'
+# Secret Key para sesiones
+SECRET_KEY = 'tu-clave-secreta-aqui'
+```
+
+**Crear `config/db.py`:**
+```python
+import mysql.connector
+
+def get_connection():
+    return mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='tu-password-mysql',
+        database='store'
+    )
 ```
 
 ### Paso 6: Ejecutar la Aplicación
@@ -329,11 +344,15 @@ tienda/
 - ✅ Decoradores de autenticación
 - ✅ Sanitización de inputs en formularios
 - ✅ Protección contra SQL injection (prepared statements)
+- ✅ `.gitignore` configurado para proteger credenciales
+- ✅ Archivos de configuración sensibles excluidos del repositorio
 - ⚠️ **Nota**: En producción, implementar:
   - Hashing de contraseñas (bcrypt)
   - HTTPS
   - Tokens CSRF
-  - Variables de entorno para secretos
+  - Variables de entorno (.env) para secretos
+  - Rate limiting
+  - Input sanitization adicional
 
 ---
 
