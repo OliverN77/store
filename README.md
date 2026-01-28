@@ -121,6 +121,11 @@ source venv/bin/activate
 ### Paso 3: Instalar Dependencias
 
 ```bash
+pip install -r requirements.txt
+```
+
+O manualmente:
+```bash
 pip install flask flask-mail mysql-connector-python python-dotenv
 ```
 
