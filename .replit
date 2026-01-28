@@ -1,1 +1,13 @@
-run = "gunicorn app:app --bind 0.0.0.0:3000"
+run = "python app.py"
+
+[deployment]
+run = ["sh", "-c", "gunicorn app:app --bind 0.0.0.0:$PORT"]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment.health]
+enabled = true
+path = "/health"
