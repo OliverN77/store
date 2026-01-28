@@ -121,7 +121,7 @@ source venv/bin/activate
 ### Paso 3: Instalar Dependencias
 
 ```bash
-pip install flask flask-mail mysql-connector-python
+pip install flask flask-mail mysql-connector-python python-dotenv
 ```
 
 ### Paso 4: Configurar Base de Datos
@@ -139,34 +139,34 @@ python create_admin.py
 
 ### Paso 5: Configurar Variables de Entorno
 
-**Importante**: Los archivos `config/settings.py` y `config/db.py` están en `.gitignore` por seguridad. Debes crearlos localmente:
+**Importante**: Copia el archivo `.env.example` a `.env` y configura tus credenciales:
 
-**Crear `config/settings.py`:**
-```python
-# Configuración de Email (Flask-Mail)
-MAIL_SERVER = 'smtp.gmail.com'
-MAIL_PORT = 587
-MAIL_USE_TLS = True
-MAIL_USERNAME = 'tu-email@gmail.com'
-MAIL_PASSWORD = 'tu-password-app'  # Usa App Password de Gmail
-MAIL_DEFAULT_SENDER = 'tu-email@gmail.com'
-
-# Secret Key para sesiones
-SECRET_KEY = 'tu-clave-secreta-aqui'
+```bash
+cp .env.example .env
 ```
 
-**Crear `config/db.py`:**
-```python
-import mysql.connector
+Luego edita `.env` con tus datos reales:
 
-def get_connection():
-    return mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='tu-password-mysql',
-        database='store'
-    )
+```env
+# Flask Configuration
+SECRET_KEY=genera-una-clave-secreta-unica
+
+# Email Configuration (Gmail)
+MAIL_SERVER=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USE_TLS=True
+MAIL_USERNAME=tu-email@gmail.com
+MAIL_PASSWORD=tu-app-password-de-gmail
+MAIL_DEFAULT_SENDER=tu-email@gmail.com
+
+# Database Configuration
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=tu-password-mysql
+DB_NAME=store
 ```
+
+**Nota**: El archivo `.env` está en `.gitignore` y nunca se subirá a GitHub. Solo `.env.example` se incluye como plantilla.
 
 ### Paso 6: Ejecutar la Aplicación
 
